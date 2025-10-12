@@ -1,0 +1,41 @@
+<div class="top-bar" [class.scrolled]="scrolled">
+  <div class="top-bar-container">
+    <!-- Contact info -->
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <span>{{ 'Tél' | translate }}: +222 45 25 44 21</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <span>info@anrsi.mr</span>
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div class="quick-links">
+      <a href="#" class="quick-link">{{ 'Actualités' | translate }}</a>
+      <a href="#" class="quick-link">{{ 'Programmes' | translate }}</a>
+      <a href="#" class="quick-link">{{ 'Coopération' | translate }}</a>
+      <a href="#" class="quick-link">{{ 'Financement' | translate }}</a>
+    </div>
+
+    <!-- Language switcher -->
+    <div class="top-actions">
+      <div class="language-switcher">
+        <button 
+          class="lang-btn" 
+          [class.active]="currentLang === 'fr'"
+          (click)="switchLanguage('fr')">
+          FR
+        </button>
+        <button 
+          class="lang-btn" 
+          [class.active]="currentLang === 'ar'"
+          (click)="switchLanguage('ar')">
+          AR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<app-hero-section></app-hero-section>
+
+<section id="news" class="section featured-section" data-aos="flip-up">
+  <div class="container">
+    <h2 class="section-title">Dernières actualités</h2>
+    <div class="grid grid-3">
+      <app-article-card 
+        *ngFor="let article of latestArticles" 
+        [article]="article">
+      </app-article-card>
+    </div>
+    <div class="text-center" style="margin-top: var(--space-8);">
+      <a routerLink="/categories" class="btn btn-primary">Voir toutes les actualités</a>
+    </div>
+  </div>
+</section>
+
+<section id="featured" class="section featured-section" data-aos="fade-up-right">
+  <div class="container">
+    <h2 class="section-title">Recherches mises en avant</h2>
+    <div class="grid grid-3">
+      <app-article-card 
+        *ngFor="let article of featuredArticles" 
+        [article]="article" 
+        [isFeatured]="true">
+      </app-article-card>
+    </div>
+  </div>
+</section>
+
+<section class="section research-areas-section" data-aos="fade-right" data-aos="zoom-up">
+  <div class="container">
+    <h2 class="section-title">Research Fields</h2>
+    <div class="grid grid-4">
+      <div class="research-area-card" *ngFor="let area of researchAreas">
+        <div class="research-area-icon" [innerHTML]="area.icon"></div>
+        <h3>{{ area.name }}</h3>
+        <p>{{ area.description }}</p>
+        <a href="#" class="btn btn-outline">Explore</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section map-section" data-aos="fade-up">
+  <div class="container">
+    <h2 class="section-title">Notre Localisation</h2>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps?q=18.099534477533627,-15.979605442328959&z=15&output=embed" 
+        width="100%" 
+        height="450" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+    <div class="map-info">
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span style="color: green;">Nouakchott, Mauritanie</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <span style="color: green;">+222 45 24 24 24</span>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <span style="color: green;">contact&#64;anrsi.mr</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section partners-section" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
+  <div class="container">
+    <h2 class="section-title">Nos Partenaires</h2>
+    <div class="partners-grid">
+      <div class="partner-card" *ngFor="let partner of partners">
+        <img [src]="partner.logo" [alt]="partner.name" class="partner-logo">
+        <div class="partner-name">{{ partner.name }}</div>
+      </div>
+    </div>
+  </div>
+</section>

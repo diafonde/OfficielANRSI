@@ -1,0 +1,39 @@
+<header [class.scrolled]="scrolled" [class.mobile-open]="mobileMenuOpen">
+  <div class="header-container">
+    <div class="logo">
+      <img src="assets/images/logos.png" alt="ANRSI Logo" class="logo-image">
+      <a routerLink="/">
+        <!-- <span class="logo-text">ANRSI</span> -->
+      </a>
+      
+    </div>
+    
+    <nav class="main-nav" [class.active]="mobileMenuOpen">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMobileMenu()">{{ 'Accueil' | translate }}</a></li>
+        <li><a routerLink="/news" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'Actualités' | translate }}</a></li>
+        <li class="dropdown" [class.open]="dropdownOpen === 'presentation'" (mouseenter)="dropdownOpen = 'presentation'" (mouseleave)="dropdownOpen = null">
+          <a href="#" (click)="$event.preventDefault()">{{ 'Présentation' | translate }} <span class="arrow">▼</span></a>
+          <div class="dropdown-menu">
+            <a href="#" (click)="closeMobileMenu()">{{ 'Missions' | translate }}</a>
+            <a href="#" (click)="closeMobileMenu()">{{ 'Objectifs' | translate }}</a>
+            <a href="#" (click)="closeMobileMenu()">{{ 'Vision Stratégique' | translate }}</a>
+            <a href="#" (click)="closeMobileMenu()">{{ 'Organigramme' | translate }}</a>
+          </div>
+        </li>
+        <li><a routerLink="/funding" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'Financement' | translate }}</a></li>
+        <li><a routerLink="/programs" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'Programmes' | translate }}</a></li>
+        <li><a routerLink="/cooperation" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'Coopération' | translate }}</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active" (click)="closeMobileMenu()">{{ 'Contact' | translate }}</a></li>            
+      </ul>
+    </nav>
+    <div class="actions">
+      <img src="assets/images/ministre.png" alt="ministre Logo" class="ministre-logo">
+      <button class="mobile-menu-btn" (click)="toggleMobileMenu()" aria-label="Menu">
+        <span [class.open]="mobileMenuOpen"></span>
+        <span [class.open]="mobileMenuOpen"></span>
+        <span [class.open]="mobileMenuOpen"></span>
+      </button>
+    </div>
+  </div>
+</header>

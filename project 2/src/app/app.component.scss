@@ -1,0 +1,142 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  padding-top: 180px; /* Account for header (140px) + top bar (40px) */
+  transition: padding-top 0.3s ease-in-out;
+}
+
+/* Adjust padding when header is scrolled */
+body.header-scrolled main {
+  padding-top: 160px; /* Account for scrolled header (120px) + top bar (40px) */
+}
+
+@media (max-width: 768px) {
+  main {
+    padding-top: 100px; /* Only header height on mobile (no top bar) */
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    padding-top: 85px; /* Only header height on small mobile (no top bar) */
+  }
+}
+
+.lang-switcher {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.lang-switcher button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #1976d2;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lang-switcher button:hover {
+  background: #125ea2;
+}
+
+/* Hero Statistics Section */
+.hero-statistics {
+  background: linear-gradient(135deg, #0a3d62 0%, #20a39e 100%);
+  color: white;
+  padding: var(--space-20) 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--space-6);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.stat-item:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.stat-number {
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+  color: #4ade80;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.slide-up {
+  animation: slideUp 0.8s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design for Statistics */
+@media (max-width: 768px) {
+  .hero-statistics {
+    padding: var(--space-16) 0;
+    gap: var(--space-6);
+  }
+  
+  .stat-item {
+    min-width: 150px;
+    padding: var(--space-4);
+  }
+  
+  .stat-number {
+    font-size: var(--text-3xl);
+  }
+  
+  .stat-label {
+    font-size: var(--text-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-statistics {
+    padding: var(--space-12) 0;
+    gap: var(--space-4);
+    flex-direction: column;
+  }
+  
+  .stat-item {
+    min-width: 200px;
+    width: 100%;
+    max-width: 300px;
+  }
+}
