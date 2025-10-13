@@ -212,7 +212,7 @@ import { CommonModule } from '@angular/common';
     .expert-hero {
       position: relative;
       height: 300px;
-      background-image: url('https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-image: url('/assets/images/anrsiback.png');
       background-size: cover;
       background-position: center;
       display: flex;

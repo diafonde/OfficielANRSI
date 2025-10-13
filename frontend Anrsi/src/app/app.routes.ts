@@ -19,6 +19,8 @@ import { AppelsCandidaturesComponent } from './pages/appels-candidatures/appels-
 import { PlateformesComponent } from './pages/plateformes/plateformes.component';
 import { ZoneHumideComponent } from './pages/zone-humide/zone-humide.component';
 import { AgenceMediasComponent } from './pages/agence-medias/agence-medias.component';
+import { ConseilAdministrationComponent } from './pages/conseil-administration/conseil-administration.component';
+import { PrioritesRecherche2026Component } from './pages/priorites-recherche-2026/priorites-recherche-2026.component';
 import { adminRoutes } from './admin/admin.routes';
 
 export const routes: Routes = [
@@ -42,6 +44,8 @@ export const routes: Routes = [
   { path: 'plateformes', component: PlateformesComponent },
   { path: 'zone-humide', component: ZoneHumideComponent },
   { path: 'agence-medias', component: AgenceMediasComponent },
+  { path: 'conseil-administration', component: ConseilAdministrationComponent },
+  { path: 'priorites-recherche-2026', component: PrioritesRecherche2026Component },
   ...adminRoutes,
   { path: '**', redirectTo: '' }
 ];
