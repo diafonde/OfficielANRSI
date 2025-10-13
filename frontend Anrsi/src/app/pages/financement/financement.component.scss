@@ -310,49 +310,31 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: var(--text-4xl);
-  }
-  
+  .hero-content h1 { font-size: var(--text-4xl); }
   .process-steps {
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
-  
   .section-content {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
-  
   .benefits-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
-  
   .cta-buttons {
     flex-direction: column;
     align-items: center;
-  }
-  
-  .cta-buttons .btn {
-    width: 100%;
-    max-width: 300px;
+    .btn {
+      width: 100%;
+      max-width: 300px;
+    }
   }
 }
 
 @media (max-width: 480px) {
-  .hero-section {
-    padding: var(--space-16) 0;
-  }
-  
-  .financement-content {
-    padding: var(--space-16) 0;
-  }
-  
-  .requirements-section {
-    padding: var(--space-8);
-  }
-  
-  .process-step {
-    padding: var(--space-6);
-  }
+  .hero-section { padding: var(--space-16) 0; }
+  .financement-content { padding: var(--space-16) 0; }
+  .requirements-section { padding: var(--space-8); }
+  .process-step { padding: var(--space-6); }
 }

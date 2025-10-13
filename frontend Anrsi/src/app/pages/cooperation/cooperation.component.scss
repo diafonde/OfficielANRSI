@@ -355,54 +355,33 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: var(--text-4xl);
-  }
-  
+  .hero-content h1 { font-size: var(--text-4xl); }
   .partnerships-grid {
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
-  
   .benefits-content {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
-  
   .world-map {
     width: 250px;
     height: 150px;
   }
-  
   .cta-buttons {
     flex-direction: column;
     align-items: center;
-  }
-  
-  .cta-buttons .btn {
-    width: 100%;
-    max-width: 300px;
+    .btn {
+      width: 100%;
+      max-width: 300px;
+    }
   }
 }
 
 @media (max-width: 480px) {
-  .hero-section {
-    padding: var(--space-16) 0;
-  }
-  
-  .cooperation-content {
-    padding: var(--space-16) 0;
-  }
-  
-  .partnerships-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .partnership-card {
-    padding: var(--space-6);
-  }
-  
-  .benefits-section {
-    padding: var(--space-8);
-  }
+  .hero-section { padding: var(--space-16) 0; }
+  .cooperation-content { padding: var(--space-16) 0; }
+  .partnerships-grid { grid-template-columns: 1fr; }
+  .partnership-card { padding: var(--space-6); }
+  .benefits-section { padding: var(--space-8); }
 }

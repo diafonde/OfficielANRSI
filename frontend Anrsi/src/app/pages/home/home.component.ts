@@ -6,7 +6,6 @@ import { ArticleCardComponent } from '../../components/article-card/article-card
 import { ArticleService } from '../../services/article.service';
 import { ANRSIDataService, ANRSIArticle, ANRSIEvent, ANRSIVideo } from '../../services/anrsi-data.service';
 import { Article } from '../../models/article.model';
-import * as AOS from 'aos';
 
 @Component({
   selector: 'app-home',
@@ -80,8 +79,13 @@ export class HomeComponent implements OnInit {
     private anrsiDataService: ANRSIDataService
   ) {}
 
-  ngOnInit(): void {
-    AOS.init();
+  async ngOnInit(): Promise<void> {
+    try {
+      const AOS = await import('aos');
+      AOS.init();
+    } catch (error) {
+      console.warn('AOS library could not be loaded:', error);
+    }
     
     // Load original articles
     this.articleService.getFeaturedArticles().subscribe(articles => {

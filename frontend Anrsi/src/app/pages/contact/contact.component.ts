@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import * as AOS from 'aos';
 
 @Component({
   selector: 'app-contact',
@@ -55,8 +54,13 @@ export class ContactComponent implements OnInit {
     }
   ];
   
-  ngOnInit(): void {
-    AOS.init();
+  async ngOnInit(): Promise<void> {
+    try {
+      const AOS = await import('aos');
+      AOS.init();
+    } catch (error) {
+      console.warn('AOS library could not be loaded:', error);
+    }
   }
   
   onSubmit() {

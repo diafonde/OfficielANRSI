@@ -7,7 +7,6 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import * as AOS from 'aos';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -38,10 +37,15 @@ export class App {
     document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }
 
-  ngOnInit() {
-    AOS.init({
-      duration: 3000,
-      once: false, // animation occurs only once
-    });
+  async ngOnInit() {
+    try {
+      const AOS = await import('aos');
+      AOS.init({
+        duration: 3000,
+        once: false, // animation occurs only once
+      });
+    } catch (error) {
+      console.warn('AOS library could not be loaded:', error);
+    }
   }
 }

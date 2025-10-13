@@ -318,10 +318,7 @@
   .filters-section {
     flex-direction: column;
     align-items: stretch;
-
-    .search-box {
-      max-width: none;
-    }
+    .search-box { max-width: none; }
   }
 
   .articles-table {
@@ -331,9 +328,7 @@
       gap: 12px;
     }
 
-    .table-header .table-row {
-      display: none;
-    }
+    .table-header .table-row { display: none; }
 
     .article-row {
       padding: 16px;
@@ -341,14 +336,8 @@
       border-radius: 8px;
       margin-bottom: 12px;
 
-      .col-image {
-        order: 1;
-      }
-
-      .col-title {
-        order: 2;
-      }
-
+      .col-image { order: 1; }
+      .col-title { order: 2; }
       .col-author,
       .col-category,
       .col-date {
@@ -358,14 +347,10 @@
         font-size: 12px;
         color: #666;
       }
-
       .col-actions {
         order: 4;
         margin-top: 12px;
-
-        .action-buttons {
-          justify-content: center;
-        }
+        .action-buttons { justify-content: center; }
       }
     }
   }
