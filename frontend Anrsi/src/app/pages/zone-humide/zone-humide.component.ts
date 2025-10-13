@@ -415,7 +415,7 @@ import { CommonModule } from '@angular/common';
     .zone-humide-hero {
       position: relative;
       height: 300px;
-      background-image: url('assets/images/anrsiback.png');
+      background-image: url('../../../assets/images/anrsiback.png');
       background-size: cover;
       background-position: center;
       display: flex;
