@@ -58,7 +58,7 @@ import { SafePipe } from '../../pages/videos/safe.pipe';
     .contact-hero {
       position: relative;
       height: 250px;
-      background-image: url('https://images.pexels.com/photos/2467506/pexels-photo-2467506.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+      background-image: url('/assets/images/anrsiback.png');
       background-size: cover;
       background-position: center;
       display: flex;
@@ -331,19 +331,19 @@ import { SafePipe } from '../../pages/videos/safe.pipe';
 
     .media-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
     }
 
     @media (min-width: 640px) {
       .media-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (min-width: 1024px) {
       .media-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
@@ -382,7 +382,7 @@ import { SafePipe } from '../../pages/videos/safe.pipe';
     }
 
     .media-caption {
-      padding: 1rem;
+      padding: 0.5rem;
       font-weight: 500;
       text-align: center;
       color: #333;
@@ -391,6 +391,7 @@ import { SafePipe } from '../../pages/videos/safe.pipe';
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.85rem;
     }
 
     @media (max-width: 480px) {
@@ -422,15 +423,20 @@ export class VideosComponent {
   selectedIndex = 0;
   videos = [
     { title: "Présentation de l'Agence", url: "https://www.youtube.com/embed/EMgwHc1F5W8", type: "youtube" },
-    { title: "Recherche Scientifique", url: "https://www.youtube.com/embed/jNQXAC9IVRw", type: "youtube" },
-    { title: "Nouvelles Technologies", url: "https://youtube.com/embed/4PupAG-vJnk", type: "youtube" }
+    { title: "Recherche Scientifique", url: "https://youtube.com/embed/bC2FLWuHTbI", type: "youtube" },
+    { title: "Nouvelles Technologies", url: "https://youtube.com/embed/4PupAG-vJnk", type: "youtube" },
+    { title: "Nouvelles Technologies", url: "https://youtube.com/embed/0yeNSWbl5MY", type: "youtube" }
+
     // Add more videos as needed
   ];
   photos = [
-    { title: "Conférence annuelle", url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80", type: "photo" },
-    { title: "Laboratoire de recherche", url: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80", type: "photo" },
-    { title: "Innovation technologique", url: "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80", type: "photo" },
-    
-    // Add more photos as needed
+    { title: "", url: "/assets/images/277154633_374993344636114_8242637262867242236_n_0.jpg.jpeg", type: "photo" },
+    { title: "", url: "/assets/images/316106463_190420513522892_2157453747881448998_n_0.jpg.jpeg", type: "photo" },
+    { title: "", url: "/assets/images/316956521_193067849924825_3676114238059618347_n_0.jpg.jpeg", type: "photo" },
+    { title: "", url: "/assets/images/317490772_193067789924831_7216683787711679640_n_0.jpg.jpeg", type: "photo" },
+    { title: "", url: "/assets/images/345629408_538652838484184_3414476345157867834_n_1.jpg.jpeg", type: "photo" },
+    { title: "", url: "/assets/images/IMG_1702AAA.jpg.jpeg", type: "photo" },
+    { title: "", url: "/assets/images/IMG_1738DDDDDDDDD.jpg.jpeg", type: "photo" },
+    { title: "", url: "/assets/images/chef.jpeg", type: "photo" }
   ];
 }
