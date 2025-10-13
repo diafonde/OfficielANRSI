@@ -15,7 +15,6 @@ export class ArticleCardComponent {
   @Input() isFeatured: boolean = false;
 
   onImageError(event: any) {
-    // Fallback to a default image if the original fails to load
     event.target.src = 'assets/images/article1.jpeg';
   }
 }

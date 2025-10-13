@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeroSectionComponent } from '../../components/hero-section/hero-section.component';
@@ -14,12 +14,17 @@ import { Article } from '../../models/article.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   featuredArticles: Article[] = [];
   latestArticles: Article[] = [];
   anrsiArticles: ANRSIArticle[] = [];
   upcomingEvents: ANRSIEvent[] = [];
   featuredVideos: ANRSIVideo[] = [];
+  
+  // Slideshow properties
+  currentSlide = 0;
+  slideshowInterval: any;
+  slidesPerView = 4;
   
   researchAreas = [
     {
@@ -100,5 +105,60 @@ export class HomeComponent implements OnInit {
     this.anrsiArticles = this.anrsiDataService.getFeaturedArticles();
     this.upcomingEvents = this.anrsiDataService.getUpcomingEvents();
     this.featuredVideos = this.anrsiDataService.getVideos().slice(0, 3);
+    
+    // Start slideshow if there are articles
+    if (this.latestArticles.length > this.slidesPerView) {
+      this.startSlideshow();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.stopSlideshow();
+  }
+
+  startSlideshow(): void {
+    this.slideshowInterval = setInterval(() => {
+      this.nextSlide();
+    }, 5000); // Change slide every 5 seconds
+  }
+
+  stopSlideshow(): void {
+    if (this.slideshowInterval) {
+      clearInterval(this.slideshowInterval);
+      this.slideshowInterval = null;
+    }
+  }
+
+  nextSlide(): void {
+    const maxSlides = Math.max(0, this.latestArticles.length - this.slidesPerView);
+    this.currentSlide = (this.currentSlide + 1) % (maxSlides + 1);
+  }
+
+  prevSlide(): void {
+    const maxSlides = Math.max(0, this.latestArticles.length - this.slidesPerView);
+    this.currentSlide = this.currentSlide === 0 ? maxSlides : this.currentSlide - 1;
+  }
+
+  goToSlide(index: number): void {
+    const maxSlides = Math.max(0, this.latestArticles.length - this.slidesPerView);
+    this.currentSlide = Math.min(index, maxSlides);
+  }
+
+  getVisibleArticles(): Article[] {
+    return this.latestArticles.slice(this.currentSlide, this.currentSlide + this.slidesPerView);
+  }
+
+  getTotalSlides(): number {
+    return Math.max(1, this.latestArticles.length - this.slidesPerView + 1);
+  }
+
+  onSlideshowMouseEnter(): void {
+    this.stopSlideshow();
+  }
+
+  onSlideshowMouseLeave(): void {
+    if (this.latestArticles.length > this.slidesPerView) {
+      this.startSlideshow();
+    }
   }
 }

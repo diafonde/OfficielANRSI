@@ -8,6 +8,17 @@ import { VideosComponent } from './pages/videos/videos.component';
 import { ProgrammesComponent } from './pages/programmes/programmes.component';
 import { FinancementComponent } from './pages/financement/financement.component';
 import { CooperationComponent } from './pages/cooperation/cooperation.component';
+import { MissionsComponent } from './pages/missions/missions.component';
+import { ObjectivesComponent } from './pages/objectives/objectives.component';
+import { StrategicVisionComponent } from './pages/strategic-vision/strategic-vision.component';
+import { OrganigrammeComponent } from './pages/organigramme/organigramme.component';
+import { ArticlesComponent } from './pages/articles/articles.component';
+import { Ai4agriComponent } from './pages/ai4agri/ai4agri.component';
+import { ExpertAnrsiComponent } from './pages/expert-anrsi/expert-anrsi.component';
+import { AppelsCandidaturesComponent } from './pages/appels-candidatures/appels-candidatures.component';
+import { PlateformesComponent } from './pages/plateformes/plateformes.component';
+import { ZoneHumideComponent } from './pages/zone-humide/zone-humide.component';
+import { AgenceMediasComponent } from './pages/agence-medias/agence-medias.component';
 import { adminRoutes } from './admin/admin.routes';
 
 export const routes: Routes = [
@@ -20,6 +31,17 @@ export const routes: Routes = [
   { path: 'programs', component: ProgrammesComponent },
   { path: 'funding', component: FinancementComponent },
   { path: 'cooperation', component: CooperationComponent },
+  { path: 'missions', component: MissionsComponent },
+  { path: 'objectives', component: ObjectivesComponent },
+  { path: 'strategic-vision', component: StrategicVisionComponent },
+  { path: 'organigramme', component: OrganigrammeComponent },
+  { path: 'articles', component: ArticlesComponent },
+  { path: 'ai4agri', component: Ai4agriComponent },
+  { path: 'expert-anrsi', component: ExpertAnrsiComponent },
+  { path: 'appels-candidatures', component: AppelsCandidaturesComponent },
+  { path: 'plateformes', component: PlateformesComponent },
+  { path: 'zone-humide', component: ZoneHumideComponent },
+  { path: 'agence-medias', component: AgenceMediasComponent },
   ...adminRoutes,
   { path: '**', redirectTo: '' }
 ];

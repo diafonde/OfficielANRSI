@@ -3,14 +3,49 @@
 <section id="news" class="section featured-section" data-aos="flip-up">
   <div class="container">
     <h2 class="section-title">Dernières actualités</h2>
-    <div class="grid grid-3">
-      <app-article-card 
-        *ngFor="let article of latestArticles" 
-        [article]="article">
-      </app-article-card>
+    
+    <!-- Slideshow Container -->
+    <div class="articles-slideshow" 
+         (mouseenter)="onSlideshowMouseEnter()" 
+         (mouseleave)="onSlideshowMouseLeave()">
+      
+      <!-- Slideshow Controls -->
+      <div class="slideshow-controls" *ngIf="latestArticles.length > slidesPerView">
+        <button class="slideshow-btn prev-btn" (click)="prevSlide()" aria-label="Previous articles">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="slideshow-btn next-btn" (click)="nextSlide()" aria-label="Next articles">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Articles Container -->
+      <div class="articles-container">
+        <div class="articles-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+          <div class="articles-slide" *ngFor="let article of latestArticles">
+            <app-article-card [article]="article"></app-article-card>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Slideshow Indicators -->
+      <div class="slideshow-indicators" *ngIf="latestArticles.length > slidesPerView">
+        <button 
+          *ngFor="let slide of [].constructor(getTotalSlides()); let i = index"
+          class="indicator" 
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)">
+        </button>
+      </div>
     </div>
-    <div class="text-center" style="margin-top: var(--space-8);">
-      <a routerLink="/categories" class="btn btn-primary">Voir toutes les actualités</a>
+    
+    <div class="text-center">
+      <a routerLink="/articles" class="btn btn-secondary">Voir toutes les actualités</a>
     </div>
   </div>
 </section>
@@ -18,7 +53,7 @@
 <section id="featured" class="section featured-section" data-aos="fade-up-right">
   <div class="container">
     <h2 class="section-title">Recherches mises en avant</h2>
-    <div class="grid grid-3">
+    <div class="grid grid-4">
       <app-article-card 
         *ngFor="let article of featuredArticles" 
         [article]="article" 

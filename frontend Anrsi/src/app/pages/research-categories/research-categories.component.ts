@@ -36,7 +36,7 @@ import { Article } from '../../models/article.model';
       </section>
       
       <section class="section articles-section">
-        <div class="grid grid-3" *ngIf="filteredArticles.length > 0">
+        <div class="grid grid-4" *ngIf="filteredArticles.length > 0">
           <app-article-card 
             *ngFor="let article of filteredArticles" 
             [article]="article">

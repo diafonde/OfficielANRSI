@@ -6,6 +6,7 @@ export interface Article {
   author: string;
   publishDate: Date;
   imageUrl: string;
+  images?: string[];
   category: string;
   tags: string[];
 }

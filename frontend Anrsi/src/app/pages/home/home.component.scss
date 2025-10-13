@@ -4,6 +4,145 @@
   z-index: 10;
 }
 
+/* Articles Slideshow Styles */
+.articles-slideshow {
+  position: relative;
+  margin: var(--space-6) 0;
+}
+
+.articles-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.articles-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.articles-slide {
+  flex: 0 0 25%; /* 4 articles per view */
+  padding: var(--space-4);
+  box-sizing: border-box;
+}
+
+.slideshow-controls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  pointer-events: none;
+}
+
+.slideshow-btn {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+  color: var(--primary-600);
+}
+
+.slideshow-btn:hover {
+  background: var(--primary-500);
+  color: white;
+  transform: scale(1.1);
+}
+
+.slideshow-btn:active {
+  transform: scale(0.95);
+}
+
+.prev-btn {
+  margin-left: var(--space-4);
+}
+
+.next-btn {
+  margin-right: var(--space-4);
+}
+
+.slideshow-indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: var(--neutral-300);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: var(--primary-500);
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: var(--primary-400);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .articles-slide {
+    flex: 0 0 33.333%; /* 3 articles per view */
+  }
+}
+
+@media (max-width: 768px) {
+  .articles-slide {
+    flex: 0 0 50%; /* 2 articles per view */
+  }
+  
+  .slideshow-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .prev-btn {
+    margin-left: var(--space-2);
+  }
+  
+  .next-btn {
+    margin-right: var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .articles-slide {
+    flex: 0 0 100%; /* 1 article per view */
+  }
+  
+  .slideshow-btn {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .slideshow-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 .research-areas-section {
   background-color: var(--neutral-100);
 }
