@@ -2,7 +2,7 @@
 
 <section id="news" class="section featured-section" data-aos="flip-up">
   <div class="container">
-    <h2 class="section-title">Dernières actualités</h2>
+    <h2 class="section-title">{{ 'Dernières actualités' | translate }}</h2>
     
     <!-- Slideshow Container -->
     <div class="articles-slideshow" 
@@ -52,7 +52,7 @@
 
 <section id="featured" class="section featured-section" data-aos="fade-up-right">
   <div class="container">
-    <h2 class="section-title">Recherches mises en avant</h2>
+    <h2 class="section-title">{{ 'Recherches mises en avant' | translate }}</h2>
     <div class="grid grid-4">
       <app-article-card 
         *ngFor="let article of featuredArticles" 
@@ -65,13 +65,13 @@
 
 <section class="section research-areas-section" data-aos="fade-right" data-aos="zoom-up">
   <div class="container">
-    <h2 class="section-title">Research Fields</h2>
+    <h2 class="section-title">{{ 'Research Fields' | translate }}</h2>
     <div class="grid grid-4">
       <div class="research-area-card" *ngFor="let area of researchAreas">
         <div class="research-area-icon" [innerHTML]="area.icon"></div>
         <h3>{{ area.name }}</h3>
         <p>{{ area.description }}</p>
-        <a href="#" class="btn btn-outline">Explore</a>
+        <a href="#" class="btn btn-outline">{{ 'Explore' | translate }}</a>
       </div>
     </div>
   </div>
@@ -79,7 +79,7 @@
 
 <section class="section map-section" data-aos="fade-up">
   <div class="container">
-    <h2 class="section-title">Notre Localisation</h2>
+    <h2 class="section-title">{{ 'Notre Localisation' | translate }}</h2>
     <div class="map-container">
       <iframe 
         src="https://www.google.com/maps?q=18.099534477533627,-15.979605442328959&z=15&output=embed" 
@@ -110,7 +110,7 @@
 
 <section class="section partners-section" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
   <div class="container">
-    <h2 class="section-title">Nos Partenaires</h2>
+    <h2 class="section-title">{{ 'Nos Partenaires' | translate }}</h2>
     <div class="partners-grid">
       <div class="partner-card" *ngFor="let partner of partners">
         <img [src]="partner.logo" [alt]="partner.name" class="partner-logo">

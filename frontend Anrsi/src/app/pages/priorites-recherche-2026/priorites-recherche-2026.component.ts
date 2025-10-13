@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface ResearchPriority {
   id: number;
@@ -11,7 +12,7 @@ interface ResearchPriority {
 @Component({
   selector: 'app-priorites-recherche-2026',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <div class="priorities-hero">
       <div class="container">
@@ -32,7 +33,7 @@ interface ResearchPriority {
             <p>Les recherches humaines et sociales occupent une place de choix dans ces axes, la stratégie leur ayant consacré deux axes à travers lesquels il est possible d'œuvrer pour "la valorisation des savoirs autochtones ancestraux afin d'affronter les enjeux sociétaux, de combattre la vulnérabilité, les disparités sociales et l'exclusion et de consolider l'unité nationale".</p>
           </div>
           
-          <h2>Les Sept Axes Stratégiques</h2>
+          <h2>{{ 'Les Sept Axes Stratégiques' | translate }}</h2>
           
           <div class="priorities-grid">
             <div class="priority-card" *ngFor="let priority of researchPriorities">
@@ -47,7 +48,7 @@ interface ResearchPriority {
           </div>
           
           <div class="priorities-date">
-            <p><strong>Date de publication :</strong> 18 Janvier 2023</p>
+            <p><strong>{{ 'Date de publication' | translate }} :</strong> 18 Janvier 2023</p>
           </div>
         </div>
       </section>

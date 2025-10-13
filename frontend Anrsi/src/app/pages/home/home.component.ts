@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { HeroSectionComponent } from '../../components/hero-section/hero-section.component';
 import { ArticleCardComponent } from '../../components/article-card/article-card.component';
 import { ArticleService } from '../../services/article.service';
@@ -10,7 +11,7 @@ import { Article } from '../../models/article.model';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, HeroSectionComponent, ArticleCardComponent],
+  imports: [CommonModule, RouterLink, TranslateModule, HeroSectionComponent, ArticleCardComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

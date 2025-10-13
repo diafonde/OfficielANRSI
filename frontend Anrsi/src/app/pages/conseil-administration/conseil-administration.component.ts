@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface BoardMember {
   name: string;
@@ -9,12 +10,12 @@ interface BoardMember {
 @Component({
   selector: 'app-conseil-administration',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateModule],
   template: `
     <div class="board-hero">
       <div class="container">
         <h1>Conseil d'Administration</h1>
-        <p>Composition du Conseil d'Administration de l'Agence Nationale de la Recherche Scientifique et de l'Innovation</p>
+        <p>{{ 'Composition du Conseil d\'Administration de l\'Agence Nationale de la Recherche Scientifique et de l\'Innovation' | translate }}</p>
       </div>
       <div class="hero-overlay"></div>
     </div>
@@ -22,7 +23,7 @@ interface BoardMember {
     <div class="container">
       <section class="section board-section">
         <div class="board-content">
-          <h2>Membres du Conseil d'Administration</h2>
+          <h2>{{ 'Membres du Conseil d\'Administration' | translate }}</h2>
           <p class="board-intro">Le Conseil d'Administration de l'ANRSI est composé de représentants de différentes institutions et secteurs, assurant une gouvernance équilibrée et représentative.</p>
           
           <div class="board-members">
@@ -35,7 +36,7 @@ interface BoardMember {
           </div>
           
           <div class="board-date">
-            <p><strong>Date de mise à jour :</strong> 11 Novembre 2021</p>
+            <p><strong>{{ 'Date de mise à jour' | translate }} :</strong> 11 Novembre 2021</p>
           </div>
         </div>
       </section>
