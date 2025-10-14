@@ -29,12 +29,25 @@ export class HeaderComponent {
     }
   }
 
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event) {
+    const target = event.target as HTMLElement;
+    const dropdown = target.closest('.dropdown');
+    if (!dropdown) {
+      this.dropdownOpen = null;
+    }
+  }
+
   toggleMobileMenu() {
     this.mobileMenuOpen = !this.mobileMenuOpen;
   }
 
   closeMobileMenu() {
     this.mobileMenuOpen = false;
+  }
+
+  togglePresentationDropdown() {
+    this.dropdownOpen = this.dropdownOpen === 'presentation' ? null : 'presentation';
   }
 
   toggleLanguage() {

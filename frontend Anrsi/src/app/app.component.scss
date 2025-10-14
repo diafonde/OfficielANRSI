@@ -17,13 +17,21 @@ body.header-scrolled main {
 
 @media (max-width: 768px) {
   main {
-    padding-top: 100px; /* Only header height on mobile (no top bar) */
+    padding-top: 140px; /* Header height (100px) + top bar height (40px) on mobile */
+  }
+  
+  body.header-scrolled main {
+    padding-top: 130px; /* Scrolled header height (90px) + top bar height (40px) on mobile */
   }
 }
 
 @media (max-width: 480px) {
   main {
-    padding-top: 85px; /* Only header height on small mobile (no top bar) */
+    padding-top: 125px; /* Header height (85px) + top bar height (40px) on small mobile */
+  }
+  
+  body.header-scrolled main {
+    padding-top: 120px; /* Scrolled header height (80px) + top bar height (40px) on small mobile */
   }
 }
 
