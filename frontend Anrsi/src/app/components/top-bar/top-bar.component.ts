@@ -86,7 +86,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   getLanguageFlag(lang: string): string {
     const flags: { [key: string]: string } = {
       'fr': '🇫🇷',
-      'ar': '🇲🇦',
+      'ar': '🇲🇷',
       'en': '🇺🇸'
     };
     return flags[lang] || '🇺🇸';
