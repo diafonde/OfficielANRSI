@@ -302,7 +302,9 @@
   display: none;
   width: 100%;
   flex-direction: column;
+  position: relative;
 }
+
 
 /* Mobile responsiveness */
 @media (max-width: 1024px) {
@@ -326,11 +328,12 @@
 
 @media (max-width: 768px) {
   .desktop-layout {
-    display: none;
+    display: none !important;
   }
   
   .mobile-layout {
-    display: flex;
+    display: flex !important;
+    position: relative;
   }
   
   .top-bar {
@@ -348,6 +351,7 @@
     padding: 0 0.75rem;
     flex-direction: column;
     gap: 0.5rem;
+    position: relative;
   }
   
   .mobile-header {
@@ -355,12 +359,14 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
   }
   
   .mobile-contact {
     display: flex;
     gap: 0.75rem;
     align-items: center;
+    flex: 1;
   }
   
   .mobile-contact .contact-item {
@@ -375,6 +381,8 @@
   .mobile-actions {
     display: flex;
     align-items: center;
+    position: relative;
+    gap: 0.5rem;
   }
   
   .mobile-actions .language-switcher {
@@ -392,6 +400,9 @@
     min-width: 100px;
     padding: 0.4rem 0.6rem;
     font-size: 0.75rem;
+    pointer-events: auto !important;
+    z-index: 1004;
+    position: relative;
   }
   
   .lang-dropdown-btn.mobile .lang-text {
@@ -406,6 +417,15 @@
   .lang-option {
     padding: 0.6rem 0.8rem;
     font-size: 0.8rem;
+    pointer-events: auto !important;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .lang-option:hover {
+    background: rgba(74, 222, 128, 0.1);
+    border-color: rgba(74, 222, 128, 0.3);
   }
   
   .lang-option .lang-name {
@@ -418,15 +438,22 @@
     gap: 0.25rem;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
     background: rgba(8, 53, 21, 0.95);
     border-radius: 6px;
     margin-top: 0.5rem;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
   
   .mobile-quick-links.expanded {
     max-height: 300px;
     padding: 0.5rem;
+    opacity: 1;
+    transform: translateY(0);
+    border: 1px solid rgba(74, 222, 128, 0.3);
   }
   
   .mobile-quick-link {
@@ -440,6 +467,9 @@
     border: 1px solid transparent;
     pointer-events: auto; /* Ensure clickability */
     cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: left;
   }
   
   .mobile-quick-link:hover {
@@ -449,11 +479,8 @@
   }
   
   .mobile-menu-toggle {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.75rem;
     background: rgba(255, 255, 255, 0.1);
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 4px;
     padding: 0.4rem;
     cursor: pointer;
@@ -461,8 +488,27 @@
     flex-direction: column;
     gap: 0.2rem;
     transition: all 0.3s ease;
-    pointer-events: auto; /* Ensure clickability */
+    pointer-events: auto !important; /* Ensure clickability */
     z-index: 1005; /* Higher z-index for mobile toggle */
+    flex-shrink: 0;
+    min-width: 40px;
+    min-height: 40px;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    position: relative;
+  }
+  
+  .mobile-menu-toggle::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: transparent;
+    z-index: -1;
   }
   
   .mobile-menu-toggle:hover {
@@ -503,6 +549,10 @@
     top: 80px; /* Scrolled small mobile header height (80px) */
   }
   
+  .top-bar-container {
+    padding: 0 0.5rem;
+  }
+  
   .mobile-contact {
     gap: 0.5rem;
   }
@@ -513,6 +563,10 @@
   
   .mobile-contact .contact-item span {
     display: none; /* Hide text on very small screens, keep icons */
+  }
+  
+  .mobile-actions {
+    gap: 0.3rem;
   }
   
   .mobile-actions .lang-btn {
@@ -540,6 +594,53 @@
   .mobile-quick-link {
     font-size: 0.75rem;
     padding: 0.35rem 0.6rem;
+  }
+  
+  .mobile-menu-toggle {
+    padding: 0.3rem;
+  }
+  
+  .hamburger-line {
+    width: 16px;
+    height: 2px;
+  }
+}
+
+@media (max-width: 360px) {
+  .top-bar-container {
+    padding: 0 0.25rem;
+  }
+  
+  .mobile-contact {
+    gap: 0.25rem;
+  }
+  
+  .mobile-contact .contact-item {
+    font-size: 0.6rem;
+  }
+  
+  .mobile-actions {
+    gap: 0.25rem;
+  }
+  
+  .lang-dropdown-btn.mobile {
+    min-width: 70px;
+    padding: 0.25rem 0.4rem;
+    font-size: 0.65rem;
+  }
+  
+  .mobile-menu-toggle {
+    padding: 0.25rem;
+  }
+  
+  .hamburger-line {
+    width: 14px;
+    height: 1.5px;
+  }
+  
+  .mobile-quick-link {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
   }
 }
 

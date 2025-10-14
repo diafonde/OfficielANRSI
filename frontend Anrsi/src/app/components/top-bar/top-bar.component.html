@@ -67,6 +67,11 @@
 
     <!-- Mobile Layout -->
     <div class="mobile-layout">
+      <!-- Quick test -->
+      <div>
+        <button onclick="alert('Test works!'); window.toggleMobileMenuJS && window.toggleMobileMenuJS();">
+        </button>
+      </div>
       <div class="mobile-header">
         <!-- Contact info (mobile) -->
         <div class="mobile-contact">
@@ -80,13 +85,14 @@
           </div>
         </div>
 
-        <!-- Language switcher (mobile) -->
+        <!-- Language switcher and Menu toggle (mobile) -->
         <div class="mobile-actions">
           <div class="language-dropdown">
             <button 
               class="lang-dropdown-btn mobile" 
-              (click)="toggleLangDropdown()"
-              [class.active]="isLangDropdownOpen">
+              onclick="window.toggleLangDropdownJS()"
+              [class.active]="isLangDropdownOpen"
+              id="mobile-lang-dropdown-btn">
               <span class="lang-flag">{{ getLanguageFlag(currentLang) }}</span>
               <span class="lang-text">{{ getLanguageName(currentLang) }}</span>
               <i class="fas fa-chevron-down" [class.rotated]="isLangDropdownOpen"></i>
@@ -95,7 +101,8 @@
               <button 
                 class="lang-option"
                 [class.active]="currentLang === 'fr'"
-                (click)="switchLanguage('fr')">
+                onclick="window.switchLanguageJS('fr')"
+                id="lang-option-fr">
                 <span class="lang-flag">🇫🇷</span>
                 <span class="lang-code">FR</span>
                 
@@ -103,7 +110,8 @@
               <button 
                 class="lang-option"
                 [class.active]="currentLang === 'ar'"
-                (click)="switchLanguage('ar')">
+                onclick="window.switchLanguageJS('ar')"
+                id="lang-option-ar">
                 <span class="lang-flag">🇲🇷</span>
                 <span class="lang-code">AR</span>
                 
@@ -111,13 +119,25 @@
               <button 
                 class="lang-option"
                 [class.active]="currentLang === 'en'"
-                (click)="switchLanguage('en')">
+                onclick="window.switchLanguageJS('en')"
+                id="lang-option-en">
                 <span class="lang-flag">🇺🇸</span>
                 <span class="lang-code">EN</span>
                 
               </button>
             </div>
           </div>
+
+          <!-- Mobile Menu Toggle -->
+          <button class="mobile-menu-toggle" 
+                  onclick="window.toggleMobileMenuJS()" 
+                  [class.active]="isMobileMenuOpen" 
+                  type="button"
+                  id="mobile-menu-toggle-btn">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
         </div>
       </div>
 
@@ -130,13 +150,6 @@
         <a routerLink="/zone-humide" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'Zone Humide' | translate }}</a>
         <a routerLink="/agence-medias" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'Agence dans Médias' | translate }}</a>
       </div>
-
-      <!-- Mobile Menu Toggle -->
-      <button class="mobile-menu-toggle" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen">
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-      </button>
     </div>
   </div>
 </div>
