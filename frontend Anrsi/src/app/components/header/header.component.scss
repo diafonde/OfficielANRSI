@@ -199,7 +199,7 @@ header.scrolled {
 
   .logo {
     flex-shrink: 0;
-    transform: translateY(-4px); /* Move logos up slightly on mobile */
+    transform: translateY(-8px); /* Move logos up on mobile */
   }
   
   .logo-image {
@@ -208,6 +208,7 @@ header.scrolled {
   
   .ministre-logo {
     height: 45px;
+    transform: translateY(-8px); /* Move ministre logo up on mobile */
   }
   
   .main-nav {
@@ -255,6 +256,7 @@ header.scrolled {
   .mobile-menu-btn {
     display: flex;
     z-index: 1004;
+    transform: translateY(-8px); /* Move button up on mobile */
   }
   
   header.mobile-open {
@@ -285,7 +287,7 @@ header.scrolled {
   
   .logo {
     flex-shrink: 0;
-    transform: translateY(-4px); /* Move logos up slightly on small mobile */
+    transform: translateY(-8px); /* Move logos up on small mobile */
   }
   
   .logo-image {
@@ -294,6 +296,7 @@ header.scrolled {
   
   .ministre-logo {
     height: 35px;
+    transform: translateY(-8px); /* Move ministre logo up on small mobile */
   }
   
   .main-nav {
@@ -308,6 +311,10 @@ header.scrolled {
   .main-nav a {
     padding: var(--space-2) var(--space-3);
     font-size: 1rem;
+  }
+  
+  .mobile-menu-btn {
+    transform: translateY(-8px); /* Move button up on small mobile */
   }
   
   .actions {
@@ -339,7 +346,7 @@ header.scrolled {
   position: absolute;
   top: calc(100% + 5px);
   left: 0;
-  background: #4ade80; /* Bright green background for maximum visibility */
+  background: #b9d0c1; /* Bright green background for maximum visibility */
   min-width: 220px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   z-index: 1010;

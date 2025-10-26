@@ -5,8 +5,8 @@
   height: 100%;
   overflow: hidden;
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -22,7 +22,8 @@
 .article-image {
   position: relative;
   overflow: hidden;
-  height: 200px;
+  height: 130px;
+  min-height: 130px;
 }
 
 .article-image img {
@@ -50,15 +51,16 @@
 }
 
 .article-content {
-  padding: var(--space-4);
+  padding: var(--space-2) var(--space-3);
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .article-title {
-  margin-bottom: var(--space-2);
-  font-size: var(--text-xl);
+  margin-bottom: var(--space-1);
+  font-size: var(--text-sm);
+  line-height: 1.3;
 }
 
 .article-title a {
@@ -81,9 +83,11 @@
 }
 
 .article-summary {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
   color: var(--neutral-700);
   flex: 1;
+  font-size: var(--text-xs);
+  line-height: 1.4;
 }
 
 .article-tags {
@@ -110,6 +114,8 @@
   text-decoration: none;
   align-self: flex-start;
   transition: transform 0.2s ease;
+  font-size: var(--text-xs);
+  margin-top: auto;
 }
 
 .read-more:hover {

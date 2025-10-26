@@ -41,6 +41,29 @@ export class ANRSIDataService {
   // Articles based on ANRSI website content
   articles: ANRSIArticle[] = [
     {
+      id: 6,
+      title: 'Conférence internationale et atelier de formation sur « La transformation des systèmes alimentaires pour l\'action climatique » (ICTW-FSTCA 2025)',
+      summary: 'L\'ANRSI organise une conférence internationale majeure sur la transformation des systèmes alimentaires dans le contexte du changement climatique.',
+      content: `L'Agence Nationale de la Recherche Scientifique et de l'Innovation (ANRSI) organise du 15 au 17 mars 2025 une conférence internationale et un atelier de formation sur « La transformation des systèmes alimentaires pour l'action climatique » (ICTW-FSTCA 2025).
+
+Cette conférence réunira des experts internationaux, des chercheurs, des décideurs politiques et des représentants du secteur privé pour discuter des défis et des opportunités liés à la transformation des systèmes alimentaires dans le contexte du changement climatique.
+
+Les thèmes principaux incluront :
+- L'adaptation des systèmes agricoles au changement climatique
+- L'innovation technologique dans la production alimentaire
+- La sécurité alimentaire et nutritionnelle
+- Les politiques publiques pour une agriculture durable
+- Le rôle de la recherche et de l'innovation
+
+Cette initiative s'inscrit dans le cadre de la stratégie nationale de recherche et d'innovation de la Mauritanie et contribue aux Objectifs de Développement Durable (ODD) des Nations Unies.`,
+      imageUrl: 'https://anrsi.mr/sites/default/files/styles/large/public/field/image/conference_internationale.jpg',
+      category: 'Conférence',
+      author: 'ANRSI',
+      publicationDate: new Date('2025-01-15'),
+      tags: ['climat', 'agriculture', 'innovation', 'développement durable'],
+      featured: true
+    },
+    {
       id: 1,
       title: 'Conférence internationale et atelier de formation sur « La transformation des systèmes alimentaires pour l\'action climatique » (ICTW-FSTCA 2025)',
       summary: 'L\'ANRSI organise une conférence internationale majeure sur la transformation des systèmes alimentaires dans le contexte du changement climatique.',

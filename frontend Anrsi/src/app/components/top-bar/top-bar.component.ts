@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -17,7 +17,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   isLangDropdownOpen = false;
   isMobileMenuOpen = false;
 
-  constructor(public translate: TranslateService) {}
+  constructor(public translate: TranslateService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     console.log('TopBarComponent ngOnInit - setting up functions');
@@ -59,13 +59,20 @@ export class TopBarComponent implements OnInit, OnDestroy {
     const dropdown = target.closest('.language-dropdown');
     const mobileMenuToggle = target.closest('.mobile-menu-toggle');
     const mobileQuickLinks = target.closest('.mobile-quick-links');
+    const hamburgerLine = target.closest('.hamburger-line');
+    const testButton = target.closest('button[onclick*="toggleMobileMenuJS"]');
     
     if (!dropdown) {
       this.isLangDropdownOpen = false;
     }
     
+    // Don't close menu if clicking on the toggle button itself or the test button
+    if (mobileMenuToggle || hamburgerLine || testButton) {
+      return;
+    }
+    
     // Close mobile menu when clicking outside
-    if (!mobileMenuToggle && !mobileQuickLinks && this.isMobileMenuOpen) {
+    if (!mobileQuickLinks && this.isMobileMenuOpen) {
       this.isMobileMenuOpen = false;
     }
   }
@@ -102,14 +109,23 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   toggleMobileMenu() {
-    console.log('Mobile menu toggle clicked, current state:', this.isMobileMenuOpen);
+    console.log('=== toggleMobileMenu called ===');
+    console.log('Current state:', this.isMobileMenuOpen);
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    console.log('Mobile menu new state:', this.isMobileMenuOpen);
+    console.log('New state:', this.isMobileMenuOpen);
+    console.log('Component instance:', this);
     
     // Force change detection
+    this.cdr.detectChanges();
+    
+    // Also force a manual class toggle as backup
     setTimeout(() => {
-      console.log('Menu state after timeout:', this.isMobileMenuOpen);
-    }, 100);
+      const menuElement = document.querySelector('.mobile-quick-links');
+      const buttonElement = document.querySelector('.mobile-menu-toggle');
+      console.log('Menu element:', menuElement);
+      console.log('Button element:', buttonElement);
+      console.log('Menu has expanded class:', menuElement?.classList.contains('expanded'));
+    }, 50);
   }
 
   closeMobileMenu() {
@@ -122,30 +138,59 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
 
   // Pure JavaScript methods for mobile interactions
-  toggleMobileMenuJS() {
+  toggleMobileMenuJS(event?: Event) {
+    // Prevent event propagation to avoid triggering document click listener
+    if (event) {
+      event.stopPropagation();
+      event.preventDefault();
+    }
+    
     console.log('toggleMobileMenuJS called - current state:', this.isMobileMenuOpen);
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
     console.log('toggleMobileMenuJS - new state:', this.isMobileMenuOpen);
     
-    // Force UI update
+    // Trigger Angular change detection
+    this.cdr.detectChanges();
+    
+    // Force UI update as backup
     const menuElement = document.querySelector('.mobile-quick-links');
+    const buttonElement = document.querySelector('.mobile-menu-toggle');
+    
     if (menuElement) {
       if (this.isMobileMenuOpen) {
         menuElement.classList.add('expanded');
-        console.log('Added expanded class');
+        console.log('Added expanded class to menu');
       } else {
         menuElement.classList.remove('expanded');
-        console.log('Removed expanded class');
+        console.log('Removed expanded class from menu');
       }
     } else {
       console.log('Menu element not found!');
     }
+    
+    if (buttonElement) {
+      if (this.isMobileMenuOpen) {
+        buttonElement.classList.add('active');
+        console.log('Added active class to button');
+      } else {
+        buttonElement.classList.remove('active');
+        console.log('Removed active class from button');
+      }
+    } else {
+      console.log('Button element not found!');
+    }
+    
+    // Prevent document click handler from firing
+    return false;
   }
 
   toggleLangDropdownJS() {
     this.isLangDropdownOpen = !this.isLangDropdownOpen;
     
-    // Force UI update
+    // Trigger Angular change detection
+    this.cdr.detectChanges();
+    
+    // Force UI update as backup
     const dropdownElement = document.querySelector('.lang-dropdown-menu.mobile');
     if (dropdownElement) {
       if (this.isLangDropdownOpen) {
@@ -162,7 +207,10 @@ export class TopBarComponent implements OnInit, OnDestroy {
     document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
     this.isLangDropdownOpen = false;
     
-    // Force UI update
+    // Trigger Angular change detection
+    this.cdr.detectChanges();
+    
+    // Force UI update as backup
     const dropdownElement = document.querySelector('.lang-dropdown-menu.mobile');
     if (dropdownElement) {
       dropdownElement.classList.remove('show');

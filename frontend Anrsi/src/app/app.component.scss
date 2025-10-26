@@ -57,14 +57,26 @@ body.header-scrolled main {
 
 /* Hero Statistics Section */
 .hero-statistics {
-  background: linear-gradient(135deg, #0a3d62 0%, #20a39e 100%);
+  height: 200px;
+  
   color: white;
-  padding: var(--space-20) 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--space-12);
-  flex-wrap: wrap;
+}
+
+.statistics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+  width: 100%;
+  max-width: 1200px;
+}
+
+@media (min-width: 768px) {
+  .statistics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .stat-item {

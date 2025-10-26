@@ -230,7 +230,7 @@ La conférence vise à renforcer le système national de recherche et d'innovati
   getRecentArticles(): Observable<Article[]> {
     return of([...this.articles]
       .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
-      .slice(0, 5)
+      .slice(0, 10) // Return 10 articles so slideshow can work
     ).pipe(delay(300));
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   // Slideshow properties
   currentSlide = 0;
   slideshowInterval: any;
-  slidesPerView = 4;
+  slidesPerView = 5;
   
   researchAreas = [
     {
@@ -93,6 +93,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       console.warn('AOS library could not be loaded:', error);
     }
     
+    // Set initial slides per view based on screen size
+    this.updateSlidesPerView();
+    
     // Load original articles
     this.articleService.getFeaturedArticles().subscribe(articles => {
       this.featuredArticles = articles;
@@ -100,17 +103,48 @@ export class HomeComponent implements OnInit, OnDestroy {
     
     this.articleService.getRecentArticles().subscribe(articles => {
       this.latestArticles = articles;
+      
+      // Start slideshow if there are articles
+      if (this.latestArticles.length > this.slidesPerView) {
+        this.startSlideshow();
+      }
     });
     
     // Load ANRSI data
     this.anrsiArticles = this.anrsiDataService.getFeaturedArticles();
     this.upcomingEvents = this.anrsiDataService.getUpcomingEvents();
     this.featuredVideos = this.anrsiDataService.getVideos().slice(0, 3);
+  }
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    const oldSlidesPerView = this.slidesPerView;
+    this.updateSlidesPerView();
     
-    // Start slideshow if there are articles
-    if (this.latestArticles.length > this.slidesPerView) {
-      this.startSlideshow();
+    // Restart slideshow if configuration changed
+    if (oldSlidesPerView !== this.slidesPerView) {
+      this.currentSlide = 0;
+      this.stopSlideshow();
+      if (this.latestArticles.length > this.slidesPerView) {
+        this.startSlideshow();
+      }
     }
+  }
+  
+  updateSlidesPerView(): void {
+    if (window.innerWidth <= 480) {
+      this.slidesPerView = 1;
+    } else if (window.innerWidth <= 768) {
+      this.slidesPerView = 2;
+    } else if (window.innerWidth <= 1200) {
+      this.slidesPerView = 3;
+    } else {
+      this.slidesPerView = 5;
+    }
+  }
+  
+  getTransformPercentage(): number {
+    return 100 / this.slidesPerView;
   }
 
   ngOnDestroy(): void {
@@ -131,18 +165,24 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   nextSlide(): void {
-    const maxSlides = Math.max(0, this.latestArticles.length - this.slidesPerView);
-    this.currentSlide = (this.currentSlide + 1) % (maxSlides + 1);
+    const maxSlides = this.getTotalSlides() - 1;
+    if (maxSlides > 0) {
+      this.currentSlide = (this.currentSlide + 1) % (maxSlides + 1);
+    }
   }
 
   prevSlide(): void {
-    const maxSlides = Math.max(0, this.latestArticles.length - this.slidesPerView);
-    this.currentSlide = this.currentSlide === 0 ? maxSlides : this.currentSlide - 1;
+    const maxSlides = this.getTotalSlides() - 1;
+    if (maxSlides > 0) {
+      this.currentSlide = this.currentSlide === 0 ? maxSlides : this.currentSlide - 1;
+    }
   }
 
   goToSlide(index: number): void {
-    const maxSlides = Math.max(0, this.latestArticles.length - this.slidesPerView);
-    this.currentSlide = Math.min(index, maxSlides);
+    const maxSlides = this.getTotalSlides() - 1;
+    if (index >= 0 && index <= maxSlides) {
+      this.currentSlide = index;
+    }
   }
 
   getVisibleArticles(): Article[] {
@@ -150,7 +190,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getTotalSlides(): number {
-    return Math.max(1, this.latestArticles.length - this.slidesPerView + 1);
+    if (this.latestArticles.length <= this.slidesPerView) {
+      return 1;
+    }
+    return this.latestArticles.length - this.slidesPerView + 1;
   }
 
   onSlideshowMouseEnter(): void {

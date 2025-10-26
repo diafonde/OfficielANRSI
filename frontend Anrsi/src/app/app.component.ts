@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { BackToTopComponent } from './components/back-to-top/back-to-top.component';
+import { AnimatedCounterComponent } from './components/animated-counter/animated-counter.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -20,6 +23,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     TopBarComponent,
     HeaderComponent,
     FooterComponent,
+    BackToTopComponent,
+    AnimatedCounterComponent,
+    BreadcrumbsComponent,
     HttpClientModule,
     TranslateModule
   ],

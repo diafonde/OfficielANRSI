@@ -3,51 +3,56 @@
 <section id="news" class="section featured-section" data-aos="flip-up">
   <div class="container">
     <h2 class="section-title">{{ 'Dernières actualités' | translate }}</h2>
+  </div>
+  
+  <!-- Slideshow Container -->
+  <div class="articles-slideshow" 
+       (mouseenter)="onSlideshowMouseEnter()" 
+       (mouseleave)="onSlideshowMouseLeave()">
     
-    <!-- Slideshow Container -->
-    <div class="articles-slideshow" 
-         (mouseenter)="onSlideshowMouseEnter()" 
-         (mouseleave)="onSlideshowMouseLeave()">
-      
-      <!-- Slideshow Controls -->
-      <div class="slideshow-controls" *ngIf="latestArticles.length > slidesPerView">
-        <button class="slideshow-btn prev-btn" (click)="prevSlide()" aria-label="Previous articles">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <button class="slideshow-btn next-btn" (click)="nextSlide()" aria-label="Next articles">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      </div>
-      
-      <!-- Articles Container -->
-      <div class="articles-container">
-        <div class="articles-track" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
-          <div class="articles-slide" *ngFor="let article of latestArticles">
-            <app-article-card [article]="article"></app-article-card>
-          </div>
+    <!-- Slideshow Controls -->
+    <div class="slideshow-controls" *ngIf="latestArticles.length > slidesPerView">
+      <button class="slideshow-btn prev-btn" (click)="prevSlide()" aria-label="Previous articles">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="slideshow-btn next-btn" (click)="nextSlide()" aria-label="Next articles">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Articles Container -->
+    <div class="articles-container">
+      <div class="articles-track" [style.transform]="'translateX(-' + (currentSlide * getTransformPercentage()) + '%)'">
+        <div class="articles-slide" *ngFor="let article of latestArticles">
+          <app-article-card [article]="article"></app-article-card>
         </div>
       </div>
-      
-      <!-- Slideshow Indicators -->
-      <div class="slideshow-indicators" *ngIf="latestArticles.length > slidesPerView">
-        <button 
-          *ngFor="let slide of [].constructor(getTotalSlides()); let i = index"
-          class="indicator" 
-          [class.active]="i === currentSlide"
-          (click)="goToSlide(i)"
-          [attr.aria-label]="'Go to slide ' + (i + 1)">
-        </button>
-      </div>
     </div>
     
-    <div class="text-center">
-      <a routerLink="/articles" class="btn btn-secondary">Voir toutes les actualités</a>
+    <!-- Slideshow Indicators -->
+    <div class="slideshow-indicators" *ngIf="latestArticles.length > slidesPerView">
+      <button 
+        *ngFor="let slide of [].constructor(getTotalSlides()); let i = index"
+        class="indicator" 
+        [class.active]="i === currentSlide"
+        (click)="goToSlide(i)"
+        [attr.aria-label]="'Go to slide ' + (i + 1)">
+      </button>
     </div>
   </div>
+  
+  <div class="container text-center mt-4">
+    <a routerLink="/articles" class="btn btn-primary">
+      {{ 'Voir toutes les actualités' | translate }}
+    </a>
+  </div>
+
+
+
 </section>
 
 <section id="featured" class="section featured-section" data-aos="fade-up-right">

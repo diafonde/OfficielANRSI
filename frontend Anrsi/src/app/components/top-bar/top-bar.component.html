@@ -67,11 +67,6 @@
 
     <!-- Mobile Layout -->
     <div class="mobile-layout">
-      <!-- Quick test -->
-      <div>
-        <button onclick="alert('Test works!'); window.toggleMobileMenuJS && window.toggleMobileMenuJS();">
-        </button>
-      </div>
       <div class="mobile-header">
         <!-- Contact info (mobile) -->
         <div class="mobile-contact">
@@ -90,7 +85,7 @@
           <div class="language-dropdown">
             <button 
               class="lang-dropdown-btn mobile" 
-              onclick="window.toggleLangDropdownJS()"
+              (click)="toggleLangDropdown()"
               [class.active]="isLangDropdownOpen"
               id="mobile-lang-dropdown-btn">
               <span class="lang-flag">{{ getLanguageFlag(currentLang) }}</span>
@@ -101,7 +96,7 @@
               <button 
                 class="lang-option"
                 [class.active]="currentLang === 'fr'"
-                onclick="window.switchLanguageJS('fr')"
+                (click)="switchLanguage('fr')"
                 id="lang-option-fr">
                 <span class="lang-flag">🇫🇷</span>
                 <span class="lang-code">FR</span>
@@ -110,7 +105,7 @@
               <button 
                 class="lang-option"
                 [class.active]="currentLang === 'ar'"
-                onclick="window.switchLanguageJS('ar')"
+                (click)="switchLanguage('ar')"
                 id="lang-option-ar">
                 <span class="lang-flag">🇲🇷</span>
                 <span class="lang-code">AR</span>
@@ -119,7 +114,7 @@
               <button 
                 class="lang-option"
                 [class.active]="currentLang === 'en'"
-                onclick="window.switchLanguageJS('en')"
+                (click)="switchLanguage('en')"
                 id="lang-option-en">
                 <span class="lang-flag">🇺🇸</span>
                 <span class="lang-code">EN</span>
@@ -130,10 +125,11 @@
 
           <!-- Mobile Menu Toggle -->
           <button class="mobile-menu-toggle" 
-                  onclick="window.toggleMobileMenuJS()" 
+                  onclick="window.toggleMobileMenuJS && window.toggleMobileMenuJS(event); return false;" 
                   [class.active]="isMobileMenuOpen" 
                   type="button"
-                  id="mobile-menu-toggle-btn">
+                  id="mobile-menu-toggle-btn"
+                  aria-label="Toggle menu">
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
             <span class="hamburger-line"></span>
