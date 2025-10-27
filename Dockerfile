@@ -3,22 +3,14 @@ FROM eclipse-temurin:17-jdk-alpine AS builder
 
 WORKDIR /app
 
-# Copy Gradle wrapper and config files
-COPY backend\ Anrsi/gradlew backend\ Anrsi/ 
-COPY backend\ Anrsi/gradle/ backend\ Anrsi/gradle/
+# Copy the entire backend directory
+COPY ["backend Anrsi", "backend Anrsi/"]
 
 # Grant execute permission
-RUN chmod +x backend\ Anrsi/gradlew
-
-# Copy build configuration
-COPY backend\ Anrsi/build.gradle backend\ Anrsi/
-COPY backend\ Anrsi/settings.gradle backend\ Anrsi/
-
-# Copy source code
-COPY backend\ Anrsi/src backend\ Anrsi/src
+RUN chmod +x backend Anrsi/gradlew
 
 # Build the application
-WORKDIR /app/backend\ Anrsi
+WORKDIR /app/backend Anrsi
 RUN ./gradlew build -x test
 
 # Runtime stage
@@ -27,7 +19,7 @@ FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
 # Copy the built JAR
-COPY --from=builder /app/backend\ Anrsi/build/libs/*.jar app.jar
+COPY --from=builder ["/app/backend Anrsi/build/libs/", "./"]
 
 # Expose port 8080
 EXPOSE 8080
