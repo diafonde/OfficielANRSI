@@ -125,7 +125,7 @@
 
           <!-- Mobile Menu Toggle -->
           <button class="mobile-menu-toggle" 
-                  onclick="window.toggleMobileMenuJS && window.toggleMobileMenuJS(event); return false;" 
+                  (click)="toggleMobileMenu()" 
                   [class.active]="isMobileMenuOpen" 
                   type="button"
                   id="mobile-menu-toggle-btn"

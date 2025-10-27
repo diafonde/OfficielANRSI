@@ -56,23 +56,27 @@ export class TopBarComponent implements OnInit, OnDestroy {
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
-    const dropdown = target.closest('.language-dropdown');
-    const mobileMenuToggle = target.closest('.mobile-menu-toggle');
-    const mobileQuickLinks = target.closest('.mobile-quick-links');
-    const hamburgerLine = target.closest('.hamburger-line');
-    const testButton = target.closest('button[onclick*="toggleMobileMenuJS"]');
     
+    // Check for language dropdown
+    const dropdown = target.closest('.language-dropdown');
     if (!dropdown) {
       this.isLangDropdownOpen = false;
     }
     
-    // Don't close menu if clicking on the toggle button itself or the test button
-    if (mobileMenuToggle || hamburgerLine || testButton) {
+    // Don't close menu if clicking on mobile menu elements
+    const isClickOnMobileMenu = 
+      target.closest('.mobile-menu-toggle') ||
+      target.closest('.mobile-quick-links') ||
+      target.closest('.mobile-actions') ||
+      target.closest('.hamburger-line') ||
+      target.id === 'mobile-menu-toggle-btn';
+    
+    if (isClickOnMobileMenu) {
       return;
     }
     
-    // Close mobile menu when clicking outside
-    if (!mobileQuickLinks && this.isMobileMenuOpen) {
+    // Close mobile menu when clicking outside mobile menu area
+    if (this.isMobileMenuOpen) {
       this.isMobileMenuOpen = false;
     }
   }
@@ -139,10 +143,9 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   // Pure JavaScript methods for mobile interactions
   toggleMobileMenuJS(event?: Event) {
-    // Prevent event propagation to avoid triggering document click listener
+    // Stop event propagation to avoid triggering document click listener
     if (event) {
       event.stopPropagation();
-      event.preventDefault();
     }
     
     console.log('toggleMobileMenuJS called - current state:', this.isMobileMenuOpen);
@@ -179,9 +182,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
     } else {
       console.log('Button element not found!');
     }
-    
-    // Prevent document click handler from firing
-    return false;
   }
 
   toggleLangDropdownJS() {

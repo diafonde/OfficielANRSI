@@ -7,7 +7,7 @@
   top: 140px; /* Position flush with header bottom */
   left: 0;
   width: 100%;
-  z-index: 1006; /* Higher z-index to ensure clickability */
+  z-index: 1006; /* Lower than header (1007) so dropdown can appear on top */
   transition: all 0.3s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   min-height: 32px;
@@ -387,6 +387,8 @@
     align-items: center;
     position: relative;
     gap: 0.5rem;
+    z-index: 1011; /* Ensure clickability above everything */
+    pointer-events: auto;
   }
   
   .mobile-actions .language-switcher {
