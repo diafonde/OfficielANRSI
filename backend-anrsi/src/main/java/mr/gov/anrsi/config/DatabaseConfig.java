@@ -1,6 +1,7 @@
 package mr.gov.anrsi.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,17 +9,15 @@ import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 @Configuration
 public class DatabaseConfig {
 
-    @Value("${DATABASE_URL:}")
-    private String databaseUrl;
-
     @Bean
     @Primary
-    public DataSource dataSource() {
+    public DataSource dataSource(DataSourceProperties properties) {
+        String databaseUrl = System.getenv("DATABASE_URL");
+        
         // If DATABASE_URL is provided (Render format), parse it
         if (databaseUrl != null && !databaseUrl.isEmpty()) {
             try {
@@ -32,15 +31,15 @@ public class DatabaseConfig {
                         .url(datasourceUrl)
                         .username(username)
                         .password(password)
+                        .driverClassName("org.postgresql.Driver")
                         .build();
-            } catch (URISyntaxException e) {
-                throw new RuntimeException("Failed to parse DATABASE_URL", e);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to parse DATABASE_URL: " + databaseUrl, e);
             }
         }
 
-        // Otherwise use environment variables with defaults
-        return DataSourceBuilder.create()
-                .url(System.getenv("DATABASE_URL"))
+        // Otherwise use the default DataSourceProperties
+        return properties.initializeDataSourceBuilder()
                 .build();
     }
 }
