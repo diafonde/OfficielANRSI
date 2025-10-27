@@ -1,6 +1,7 @@
 package mr.gov.anrsi.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ public class DatabaseConfig {
 
     @Bean
     @Primary
+    @ConditionalOnProperty(name = "spring.datasource.url")
     public DataSource dataSource(DataSourceProperties properties) {
         String databaseUrl = System.getenv("DATABASE_URL");
         
