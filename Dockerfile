@@ -1,5 +1,5 @@
 # Root Dockerfile for Backend Deployment
-FROM openjdk:17-jdk-slim AS builder
+FROM eclipse-temurin:17-jdk-alpine AS builder
 
 WORKDIR /app
 
@@ -22,7 +22,7 @@ WORKDIR /app/backend Anrsi
 RUN ./gradlew build -x test
 
 # Runtime stage
-FROM openjdk:17-jre-slim
+FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
