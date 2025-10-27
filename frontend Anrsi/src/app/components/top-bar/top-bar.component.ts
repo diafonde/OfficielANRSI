@@ -20,23 +20,11 @@ export class TopBarComponent implements OnInit, OnDestroy {
   constructor(public translate: TranslateService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    console.log('TopBarComponent ngOnInit - setting up functions');
-    // Make pure JavaScript functions available globally
-    (window as any).toggleMobileMenuJS = () => this.toggleMobileMenuJS();
-    (window as any).toggleLangDropdownJS = () => this.toggleLangDropdownJS();
-    (window as any).switchLanguageJS = (lang: string) => this.switchLanguageJS(lang);
-    console.log('Functions set up:', {
-      toggleMobileMenuJS: typeof (window as any).toggleMobileMenuJS,
-      toggleLangDropdownJS: typeof (window as any).toggleLangDropdownJS,
-      switchLanguageJS: typeof (window as any).switchLanguageJS
-    });
+    // Component initialization
   }
 
   ngOnDestroy() {
-    // Clean up global functions
-    delete (window as any).toggleMobileMenuJS;
-    delete (window as any).toggleLangDropdownJS;
-    delete (window as any).switchLanguageJS;
+    // Cleanup
   }
 
   @HostListener('window:scroll')
@@ -58,26 +46,29 @@ export class TopBarComponent implements OnInit, OnDestroy {
     const target = event.target as HTMLElement;
     
     // Check for language dropdown
-    const dropdown = target.closest('.language-dropdown');
-    if (!dropdown) {
+    const isClickInsideDropdown = target.closest('.language-dropdown');
+    if (!isClickInsideDropdown) {
       this.isLangDropdownOpen = false;
     }
     
-    // Don't close menu if clicking on mobile menu elements
-    const isClickOnMobileMenu = 
-      target.closest('.mobile-menu-toggle') ||
-      target.closest('.mobile-quick-links') ||
-      target.closest('.mobile-actions') ||
-      target.closest('.hamburger-line') ||
-      target.id === 'mobile-menu-toggle-btn';
-    
-    if (isClickOnMobileMenu) {
+    // Check if click is on mobile menu toggle button or inside it
+    const isClickOnToggle = target.closest('.mobile-menu-toggle');
+    if (isClickOnToggle) {
+      // Don't close the menu, let the toggle handler do its job
       return;
     }
     
-    // Close mobile menu when clicking outside mobile menu area
+    // Check if click is inside mobile quick links (the expanded menu)
+    const isClickInsideMenu = target.closest('.mobile-quick-links');
+    if (isClickInsideMenu) {
+      // Don't close the menu when clicking on links
+      return;
+    }
+    
+    // Close mobile menu when clicking outside
     if (this.isMobileMenuOpen) {
       this.isMobileMenuOpen = false;
+      this.cdr.detectChanges();
     }
   }
 
@@ -89,9 +80,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   }
 
   toggleLangDropdown() {
-    console.log('Language dropdown toggle clicked, current state:', this.isLangDropdownOpen);
     this.isLangDropdownOpen = !this.isLangDropdownOpen;
-    console.log('Language dropdown new state:', this.isLangDropdownOpen);
   }
 
   getLanguageFlag(lang: string): string {
@@ -112,108 +101,26 @@ export class TopBarComponent implements OnInit, OnDestroy {
     return names[lang] || 'En';
   }
 
-  toggleMobileMenu() {
-    console.log('=== toggleMobileMenu called ===');
-    console.log('Current state:', this.isMobileMenuOpen);
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    console.log('New state:', this.isMobileMenuOpen);
-    console.log('Component instance:', this);
-    
-    // Force change detection
-    this.cdr.detectChanges();
-    
-    // Also force a manual class toggle as backup
-    setTimeout(() => {
-      const menuElement = document.querySelector('.mobile-quick-links');
-      const buttonElement = document.querySelector('.mobile-menu-toggle');
-      console.log('Menu element:', menuElement);
-      console.log('Button element:', buttonElement);
-      console.log('Menu has expanded class:', menuElement?.classList.contains('expanded'));
-    }, 50);
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-  }
-
-  isMobile(): boolean {
-    return window.innerWidth <= 768;
-  }
-
-
-  // Pure JavaScript methods for mobile interactions
-  toggleMobileMenuJS(event?: Event) {
-    // Stop event propagation to avoid triggering document click listener
+  toggleMobileMenu(event?: Event) {
+    // Stop event propagation to prevent document click handler from interfering
     if (event) {
       event.stopPropagation();
     }
     
-    console.log('toggleMobileMenuJS called - current state:', this.isMobileMenuOpen);
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
-    console.log('toggleMobileMenuJS - new state:', this.isMobileMenuOpen);
-    
-    // Trigger Angular change detection
     this.cdr.detectChanges();
-    
-    // Force UI update as backup
-    const menuElement = document.querySelector('.mobile-quick-links');
-    const buttonElement = document.querySelector('.mobile-menu-toggle');
-    
-    if (menuElement) {
-      if (this.isMobileMenuOpen) {
-        menuElement.classList.add('expanded');
-        console.log('Added expanded class to menu');
-      } else {
-        menuElement.classList.remove('expanded');
-        console.log('Removed expanded class from menu');
-      }
-    } else {
-      console.log('Menu element not found!');
-    }
-    
-    if (buttonElement) {
-      if (this.isMobileMenuOpen) {
-        buttonElement.classList.add('active');
-        console.log('Added active class to button');
-      } else {
-        buttonElement.classList.remove('active');
-        console.log('Removed active class from button');
-      }
-    } else {
-      console.log('Button element not found!');
-    }
   }
 
-  toggleLangDropdownJS() {
-    this.isLangDropdownOpen = !this.isLangDropdownOpen;
-    
-    // Trigger Angular change detection
-    this.cdr.detectChanges();
-    
-    // Force UI update as backup
-    const dropdownElement = document.querySelector('.lang-dropdown-menu.mobile');
-    if (dropdownElement) {
-      if (this.isLangDropdownOpen) {
-        dropdownElement.classList.add('show');
-      } else {
-        dropdownElement.classList.remove('show');
-      }
+  closeMobileMenu(event?: Event) {
+    // Stop event propagation to prevent document click handler from interfering
+    if (event) {
+      event.stopPropagation();
     }
+    this.isMobileMenuOpen = false;
+    this.cdr.detectChanges();
   }
 
-  switchLanguageJS(lang: string) {
-    this.currentLang = lang;
-    this.translate.use(lang);
-    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    this.isLangDropdownOpen = false;
-    
-    // Trigger Angular change detection
-    this.cdr.detectChanges();
-    
-    // Force UI update as backup
-    const dropdownElement = document.querySelector('.lang-dropdown-menu.mobile');
-    if (dropdownElement) {
-      dropdownElement.classList.remove('show');
-    }
+  isMobile(): boolean {
+    return window.innerWidth <= 768;
   }
 }

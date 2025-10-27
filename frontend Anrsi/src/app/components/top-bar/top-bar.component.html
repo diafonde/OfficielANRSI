@@ -125,7 +125,7 @@
 
           <!-- Mobile Menu Toggle -->
           <button class="mobile-menu-toggle" 
-                  (click)="toggleMobileMenu()" 
+                  (click)="toggleMobileMenu($event)" 
                   [class.active]="isMobileMenuOpen" 
                   type="button"
                   id="mobile-menu-toggle-btn"
@@ -139,12 +139,12 @@
 
       <!-- Mobile Quick Links -->
       <div class="mobile-quick-links" [class.expanded]="isMobileMenuOpen">
-        <a routerLink="/ai4agri" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'AI 4 AGRI' | translate }}</a>
-        <a routerLink="/expert-anrsi" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'Expert à l\'ANRSI' | translate }}</a>
-        <a routerLink="/appels-candidatures" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'Appels à Candidatures' | translate }}</a>
-        <a routerLink="/plateformes" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'Plateformes' | translate }}</a>
-        <a routerLink="/zone-humide" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'Zone Humide' | translate }}</a>
-        <a routerLink="/agence-medias" class="mobile-quick-link" (click)="closeMobileMenu()">{{ 'Agence dans Médias' | translate }}</a>
+        <a routerLink="/ai4agri" class="mobile-quick-link" (click)="closeMobileMenu($event)">{{ 'AI 4 AGRI' | translate }}</a>
+        <a routerLink="/expert-anrsi" class="mobile-quick-link" (click)="closeMobileMenu($event)">{{ 'Expert à l\'ANRSI' | translate }}</a>
+        <a routerLink="/appels-candidatures" class="mobile-quick-link" (click)="closeMobileMenu($event)">{{ 'Appels à Candidatures' | translate }}</a>
+        <a routerLink="/plateformes" class="mobile-quick-link" (click)="closeMobileMenu($event)">{{ 'Plateformes' | translate }}</a>
+        <a routerLink="/zone-humide" class="mobile-quick-link" (click)="closeMobileMenu($event)">{{ 'Zone Humide' | translate }}</a>
+        <a routerLink="/agence-medias" class="mobile-quick-link" (click)="closeMobileMenu($event)">{{ 'Agence dans Médias' | translate }}</a>
       </div>
     </div>
   </div>

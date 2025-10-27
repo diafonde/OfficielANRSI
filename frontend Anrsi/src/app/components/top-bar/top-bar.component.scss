@@ -364,6 +364,8 @@
     width: 100%;
     position: relative;
     flex: 0 0 auto;
+    overflow: visible;
+    min-height: 0;
   }
   
   .mobile-contact {
@@ -371,6 +373,9 @@
     gap: 0.75rem;
     align-items: center;
     flex: 1;
+    flex-shrink: 1;
+    min-width: 0; /* Allow flex item to shrink below its content size */
+    overflow: hidden;
   }
   
   .mobile-contact .contact-item {
@@ -389,6 +394,8 @@
     gap: 0.5rem;
     z-index: 1011; /* Ensure clickability above everything */
     pointer-events: auto;
+    flex-shrink: 0; /* Prevent shrinking */
+    min-width: fit-content;
   }
   
   .mobile-actions .language-switcher {
@@ -496,7 +503,7 @@
     border-radius: 4px;
     padding: 0.4rem;
     cursor: pointer;
-    display: flex;
+    display: flex !important; /* Force display */
     flex-direction: column;
     gap: 0.2rem;
     transition: all 0.3s ease;
@@ -511,6 +518,8 @@
     touch-action: manipulation;
     position: relative;
     transform: translateZ(0); /* Force hardware acceleration */
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   .mobile-menu-toggle::before {
@@ -538,6 +547,8 @@
     background: white;
     transition: all 0.3s ease;
     border-radius: 1px;
+    pointer-events: none; /* Let clicks pass through to button */
+    flex-shrink: 0;
   }
   
   .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
@@ -550,6 +561,55 @@
   
   .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -6px);
+  }
+}
+
+@media (max-width: 500px) {
+  .mobile-menu-toggle {
+    z-index: 1010 !important;
+    pointer-events: auto !important;
+    position: relative;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .mobile-actions {
+    z-index: 1011 !important;
+    pointer-events: auto !important;
+    display: flex !important;
+    align-items: center;
+  }
+  
+  .mobile-header {
+    overflow: visible !important;
+  }
+  
+  .mobile-contact {
+    overflow: hidden;
+    flex-shrink: 1;
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-menu-toggle {
+    z-index: 1010 !important;
+    pointer-events: auto !important;
+    position: relative;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+  
+  .mobile-actions {
+    z-index: 1011 !important;
+    pointer-events: auto !important;
+    flex-shrink: 0 !important;
+    min-width: fit-content !important;
+    display: flex !important;
+    align-items: center;
   }
 }
 
@@ -580,6 +640,10 @@
   
   .mobile-actions {
     gap: 0.3rem;
+    z-index: 1011 !important; /* Ensure clickability above everything */
+    pointer-events: auto !important;
+    display: flex !important;
+    align-items: center;
   }
   
   .mobile-actions .lang-btn {
@@ -610,9 +674,15 @@
   }
   
   .mobile-menu-toggle {
+    display: flex !important;
     padding: 0.3rem;
     min-width: 35px;
     min-height: 35px;
+    z-index: 1010 !important; /* Ensure clickability */
+    pointer-events: auto !important;
+    position: relative;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   .hamburger-line {
@@ -636,6 +706,10 @@
   
   .mobile-actions {
     gap: 0.25rem;
+    z-index: 1011 !important; /* Ensure clickability above everything */
+    pointer-events: auto !important;
+    display: flex !important;
+    align-items: center;
   }
   
   .lang-dropdown-btn.mobile {
@@ -645,9 +719,15 @@
   }
   
   .mobile-menu-toggle {
+    display: flex !important;
     padding: 0.25rem;
     min-width: 32px;
     min-height: 32px;
+    z-index: 1010 !important; /* Ensure clickability */
+    pointer-events: auto !important;
+    position: relative;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
   
   .hamburger-line {
