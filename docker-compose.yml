@@ -22,7 +22,7 @@ services:
   # Spring Boot Backend
   backend:
     build:
-      context: ./backend Anrsi
+      context: ./backend-anrsi
       dockerfile: Dockerfile
     container_name: anrsi-backend
     environment:
@@ -42,7 +42,7 @@ services:
   # Angular Frontend
   frontend:
     build:
-      context: ./frontend Anrsi
+      context: ./frontend-anrsi
       dockerfile: Dockerfile
     container_name: anrsi-frontend
     ports:
